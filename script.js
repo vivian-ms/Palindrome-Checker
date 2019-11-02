@@ -1,3 +1,16 @@
+$(function() {
+  $('form').on('submit', function(evt) {
+    evt.preventDefault();
+    palindrome( $('input').val() );
+  });
+
+  $('#clear').on('click', function(evt) {
+    $('#result').empty();
+    $('input').focus();
+  });
+});
+
+
 function palindrome(string) {
   // 1) Remove non-alphanumeric characters
   // 2) Turn all letters to lowercase
@@ -9,8 +22,10 @@ function palindrome(string) {
   array.reverse();
 
   if (array.join('') == array_copy.join('')) {
-    return true;
+    $('#result').append(`<li><b>${string}</b> is a palindrome</li>`);
   } else {
-    return false;
+    $('#result').append(`<li><b>${string}</b> is not a palindrome</li>`);
   }
+
+  $('input').val('');
 }
